@@ -70,9 +70,11 @@ export default class Trip extends Component {
   render() {
     return(
       <div>
-        <AppBar>
+        <div>
+        <AppBar position="sticky">
           <Authent setCredentials={this.setCredentials} />
         </AppBar>
+        </div>
         { this.state.lights_loaded ?
           <List component="div" disablePadding>
           <Groups
