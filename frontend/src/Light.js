@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export default class Light extends Component {
   constructor(props) {
@@ -21,9 +24,9 @@ export default class Light extends Component {
 
   render() {
     return(
-      <div onClick={this.toggleLight}>
-      {this.props.name}
-      </div>
+      <ListItem button onClick={this.toggleLight} selected={this.state.selected}>
+        <ListItemText primary={this.props.name} inset={true}/>
+      </ListItem>
     )
   }  
 }    
