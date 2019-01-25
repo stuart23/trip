@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Authent.css';
 
 export default class Authent extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class Authent extends Component {
     .then(response => response.json())
     .then(response => {
       if ("error" in response[0]) {
-        this.setState({message: response[0].error.description});
+        this.setState({error: true, message: response[0].error.description});
       } else if ("success" in response[0]) {
         this.setState({
           message: "success", 
@@ -73,9 +74,16 @@ export default class Authent extends Component {
 
   render() {
     return (
-      <div>
-      {this.state.error}
-      {this.state.logged_in ? "YES" : "NO"}
+      <div className={"Authent"}>
+        {this.state.error ? 
+          <div className="Error">
+            {this.state.message}
+          </div>
+        :
+          <div className={this.state.logged_in ? "Connected" : "Connecting"}>
+            {this.state.logged_in ? "Connected" : "Connecting"}
+          </div>
+        }
       </div>
     )
   }
