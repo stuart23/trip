@@ -4,6 +4,7 @@ import Groups from './Groups';
 import LightController from './LightController';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import AppBar from '@material-ui/core/AppBar';
 
 export default class Trip extends Component {
   constructor(props) {
@@ -69,22 +70,24 @@ export default class Trip extends Component {
   render() {
     return(
       <div>
-      <Authent setCredentials={this.setCredentials} />
-      { this.state.lights_loaded ?
-        <List component="div" disablePadding>
-        <Groups
-          groups={this.state.groups}
-          activateLight={this.activateLight}
-          deactivateLight={this.deactivateLight}
+        <AppBar>
+          <Authent setCredentials={this.setCredentials} />
+        </AppBar>
+        { this.state.lights_loaded ?
+          <List component="div" disablePadding>
+          <Groups
+            groups={this.state.groups}
+            activateLight={this.activateLight}
+            deactivateLight={this.deactivateLight}
+          />
+          </List> :
+           "Loading"
+        }
+        <LightController
+          active_lights={this.state.active_lights}
+          bridge_ip={this.state.bridge_ip}
+          username={this.state.username}
         />
-        </List> :
-       "Loading"
-      }
-      <LightController
-        active_lights={this.state.active_lights}
-        bridge_ip={this.state.bridge_ip}
-        username={this.state.username}
-      />
       </div>
     )
   }

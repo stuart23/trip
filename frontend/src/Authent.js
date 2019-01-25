@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Authent.css';
+import Toolbar from '@material-ui/core/Toolbar';
 
 export default class Authent extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ export default class Authent extends Component {
 
   render() {
     return (
+      <Toolbar>
       <div className={"Authent"}>
         {this.state.error ? 
           <div className="Error">
@@ -85,6 +87,7 @@ export default class Authent extends Component {
           </div>
         }
       </div>
+      </Toolbar>
     )
   }
 }
