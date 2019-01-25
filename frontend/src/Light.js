@@ -23,10 +23,9 @@ export default class Light extends Component {
   }
 
   render() {
-    //  <div onClick={this.toggleLight}>
     return(
-      <ListItem button>
-        <ListItemText primary={this.props.name} />
+      <ListItem button onClick={this.toggleLight} selected={this.state.selected}>
+        <ListItemText primary={this.props.name} inset={true}/>
       </ListItem>
     )
   }  
