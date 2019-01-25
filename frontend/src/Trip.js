@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Authent from './Authent';
 import Groups from './Groups';
+import LightController from './LightController';
 
 export default class Trip extends Component {
   constructor(props) {
@@ -75,6 +76,11 @@ export default class Trip extends Component {
         /> :
        "Loading"
       }
+      <LightController
+        active_lights={this.state.active_lights}
+        bridge_ip={this.state.bridge_ip}
+        username={this.state.username}
+      />
       </div>
     )
   }
