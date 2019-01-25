@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import './LightController.css';
 
 export default class LightController extends Component {
   constructor(props) {
@@ -36,12 +38,12 @@ export default class LightController extends Component {
   render() {
     return(
       <div>
-        <div onClick={this.switchOn}>
+        <Button variant="contained" color="111111" onClick={this.switchOn}>
           Switch On
-        </div>
-        <div onClick={this.switchOff}>
+        </Button>
+        <Button variant="contained" className="DarkButton" onClick={this.switchOff}>
           Switch Off
-        </div>
+        </Button>
       </div>
     )
   }  
