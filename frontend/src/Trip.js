@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Authent from './Authent';
 import Groups from './Groups';
 import LightController from './LightController';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 export default class Trip extends Component {
   constructor(props) {
@@ -69,11 +71,13 @@ export default class Trip extends Component {
       <div>
       <Authent setCredentials={this.setCredentials} />
       { this.state.lights_loaded ?
+        <List component="div" disablePadding>
         <Groups
           groups={this.state.groups}
           activateLight={this.activateLight}
           deactivateLight={this.deactivateLight}
-        /> :
+        />
+        </List> :
        "Loading"
       }
       <LightController
