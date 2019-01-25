@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
-import './Authent.css';
 import Toolbar from '@material-ui/core/Toolbar';
+import { withStyles } from '@material-ui/styles';
 
-export default class Authent extends Component {
+const styles = {
+  connected: {
+    padding: "1em",
+    fontWeight: "bold",
+    fontSize: "x-large",
+    color: "white",
+    textShadow: "0 0 2px #0F0, 0 0 4px #0B0, 0 0 6px #070",
+  },
+  connecting: {
+    padding: "1em",
+    fontWeight: "bold",
+    fontSize: "x-large",
+    color: "white",
+    textShadow: "0 0 2px #F80, 0 0 4px #B60, 0 0 6px #740",
+  },
+  error: {
+    padding: "1em",
+    fontWeight: "bold",
+    fontSize: "x-large",
+    color: "red",
+    textShadow: "0 0 2px #DDD, 0 0 4px #888, 0 0 6px #444",
+  }
+}
+
+class Authent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +82,7 @@ export default class Authent extends Component {
         this.setState({error: true, message: response[0].error.description});
       } else if ("success" in response[0]) {
         this.setState({
-          message: "success", 
+          message: "success",
           username: response[0].success.username,
           logged_in: true
         });
@@ -74,20 +98,21 @@ export default class Authent extends Component {
   }
 
   render() {
+    const {classes} = this.props;
     return (
       <Toolbar>
-      <div className={"Authent"}>
-        {this.state.error ? 
-          <div className="Error">
+        {this.state.error ?
+          <div className={classes.error}>
             {this.state.message}
           </div>
         :
-          <div className={this.state.logged_in ? "Connected" : "Connecting"}>
+          <div className={this.state.logged_in ? classes.connected : classes.connecting}>
             {this.state.logged_in ? "Connected" : "Connecting"}
           </div>
         }
-      </div>
       </Toolbar>
     )
   }
 }
+
+export default withStyles(styles)(Authent);
