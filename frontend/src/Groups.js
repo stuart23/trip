@@ -8,7 +8,12 @@ export default class Groups extends Component {
 
   render() {
     const groups = this.props.groups.map(group =>
-      <Group name={group.name} lights={group.lights} />
+      <Group
+        name={group.name}
+        lights={group.lights}
+        activateLight={this.props.activateLight}
+        deactivateLight={this.props.deactivateLight}
+      />
     );
     return(groups);
   } 

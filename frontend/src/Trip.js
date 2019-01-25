@@ -10,9 +10,12 @@ export default class Trip extends Component {
       lights_loaded: false,
       bridge_ip: "",
       username: "",
-      lights: {}
+      lights: {},
+      active_lights: []
     }
     this.setCredentials = this.setCredentials.bind(this);
+    this.activateLight = this.activateLight.bind(this);
+    this.deactivateLight = this.deactivateLight.bind(this);
   }
 
   setCredentials(username, bridge_ip) {
@@ -22,6 +25,18 @@ export default class Trip extends Component {
       username: username
     });
   }  
+
+  activateLight(light_id) {
+    this.setState({
+      active_lights: this.state.active_lights.concat(light_id)
+    });
+  }
+
+  deactivateLight(light_id) {
+    this.setState({
+      active_lights: this.state.active_lights.filter(id => id !== light_id)
+    });
+  }
 
   componentDidUpdate() {
     if (this.state.logged_in & !this.state.lights_loaded) {
@@ -53,8 +68,12 @@ export default class Trip extends Component {
       <div>
       <Authent setCredentials={this.setCredentials} />
       { this.state.lights_loaded ?
-         <Groups groups={this.state.groups} /> :
-         "Loading"
+        <Groups
+          groups={this.state.groups}
+          activateLight={this.activateLight}
+          deactivateLight={this.deactivateLight}
+        /> :
+       "Loading"
       }
       </div>
     )
