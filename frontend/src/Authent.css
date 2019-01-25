@@ -1,0 +1,16 @@
+.Authent {
+  padding: 1em;
+}
+
+.Connected {
+  color: green;
+}
+
+.Connecting {
+  color: orange;
+}
+
+.Error {
+  color: red;
+  font-weight: bold;
+}
