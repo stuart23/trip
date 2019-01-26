@@ -9,22 +9,28 @@ export default class ReactAccelerometer extends Component {
       y: null,
       z: null,
       rotation: null,
-      landscape: false
+      landscape: false,
+      intervalId: null
     }
 
     this.handleAcceleration = this.handleAcceleration.bind(this);
     this.handleOrientation = this.handleOrientation.bind(this);
+    this.updateLights = this.updateLights.bind(this);
   }
 
   componentDidMount () {
     this.handleOrientation()
     window.addEventListener('devicemotion', this.handleAcceleration)
     window.addEventListener('orientationchange', this.handleOrientation)
+
+    var intervalId = setInterval(this.updateLights, 100);
+    this.setState({intervalId: intervalId});
   }
 
   componentWillUnmount () {
     window.removeEventListener('devicemotion', this.handleAcceleration)
     window.removeEventListener('orientationchange', this.handleOrientation)
+    clearInterval(this.state.intervalId);
   }
 
   handleOrientation (event) {
@@ -41,11 +47,14 @@ export default class ReactAccelerometer extends Component {
 
     this.setState({
       rotation,
-      x: (landscape ? y : x) * multiplier,
-      y: (landscape ? x : y) * multiplier,
+      x: x * multiplier,
+      y: y * multiplier,
       z: z * multiplier
     })
-    this.props.control({"hue": 65534/2 + (x/10*65534/2)});
+  }
+
+  updateLights() {
+    this.props.control({"hue": Math.round(65534/2 + (this.state.x/10*65534/2)), "sat": 254, "transitiontime": 0});
   }
 
   render () {
@@ -57,17 +66,7 @@ export default class ReactAccelerometer extends Component {
      */
     console.log(this.state);
     return(
-      <div>
-        <div>
-         { x }
-        </div>
-        <div>
-         { y }
-        </div>
-        <div>
-         { z }
-        </div>
-      </div>
+      null
     )
   }
 }
