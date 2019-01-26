@@ -57,13 +57,15 @@ export default class ReactAccelerometer extends Component {
     console.log(this.state);
     return(
       <div>
-       { x }
-      </div>
-      <div>
-       { y }
-      </div>
-      <div>
-       { z }
+        <div>
+         { x }
+        </div>
+        <div>
+         { y }
+        </div>
+        <div>
+         { z }
+        </div>
       </div>
     )
   }
