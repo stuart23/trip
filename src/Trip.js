@@ -85,7 +85,7 @@ export default class Trip extends Component {
           </List> :
            "Loading"
         }
-        <GyroController />
+        <GyroController useGravity={false} multiplier={1} />
         <LightController
           active_lights={this.state.active_lights}
           bridge_ip={this.state.bridge_ip}

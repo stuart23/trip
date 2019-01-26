@@ -5,12 +5,11 @@ export default class ReactAccelerometer extends Component {
     super(props)
 
     this.state = {
-      x: 1,
-      y: 2,
-      z: 3,
+      x: null,
+      y: null,
+      z: null,
       rotation: null,
-      landscape: false,
-      counter: 0
+      landscape: false
     }
 
     this.handleAcceleration = this.handleAcceleration.bind(this);
@@ -44,8 +43,7 @@ export default class ReactAccelerometer extends Component {
       rotation,
       x: (landscape ? y : x) * multiplier,
       y: (landscape ? x : y) * multiplier,
-      z: z * multiplier,
-      counter: this.state.counter + 1
+      z: z * multiplier
     })
   }
 
@@ -59,7 +57,13 @@ export default class ReactAccelerometer extends Component {
     console.log(this.state);
     return(
       <div>
-       { x } { y } { z }{ this.state.counter }
+       { x }
+      </div>
+      <div>
+       { y }
+      </div>
+      <div>
+       { z }
       </div>
     )
   }
