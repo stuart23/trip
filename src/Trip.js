@@ -4,7 +4,6 @@ import Groups from './Groups';
 import LightController from './LightController';
 import GyroController from './GyroController';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import AppBar from '@material-ui/core/AppBar';
 
 export default class Trip extends Component {
