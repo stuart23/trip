@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Authent from './Authent';
 import Groups from './Groups';
-import LightController from './LightController';
+import Controller from './Controller';
 import GyroController from './GyroController';
 import List from '@material-ui/core/List';
 import AppBar from '@material-ui/core/AppBar';
@@ -86,7 +86,7 @@ export default class Trip extends Component {
            "Loading"
         }
         <GyroController useGravity={false} multiplier={1} />
-        <LightController
+        <Controller
           active_lights={this.state.active_lights}
           bridge_ip={this.state.bridge_ip}
           username={this.state.username}
