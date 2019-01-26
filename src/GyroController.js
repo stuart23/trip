@@ -45,6 +45,7 @@ export default class ReactAccelerometer extends Component {
       y: (landscape ? x : y) * multiplier,
       z: z * multiplier
     })
+    this.props.control({"hue": 65534/2 + (x/10*65534/2)});
   }
 
   render () {
