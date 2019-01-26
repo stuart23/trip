@@ -5,11 +5,12 @@ export default class ReactAccelerometer extends Component {
     super(props)
 
     this.state = {
-      x: null,
-      y: null,
-      z: null,
+      x: 1,
+      y: 2,
+      z: 3,
       rotation: null,
-      landscape: false
+      landscape: false,
+      counter: 0
     }
 
     this.handleAcceleration = this.handleAcceleration.bind(this);
@@ -43,7 +44,8 @@ export default class ReactAccelerometer extends Component {
       rotation,
       x: (landscape ? y : x) * multiplier,
       y: (landscape ? x : y) * multiplier,
-      z: z * multiplier
+      z: z * multiplier,
+      counter: this.state.counter + 1
     })
   }
 
@@ -55,14 +57,10 @@ export default class ReactAccelerometer extends Component {
      * as some browsers implement the API, but the device itself doesn't support.
      */
     console.log(this.state);
-    if (x || y || z) {
-      return(
-        <div>
-         { x } { y } { z }
-        </div>
-      )
-    } else {
-      return ( "Run on mobile" )
-    }
+    return(
+      <div>
+       { x } { y } { z }{ this.state.counter }
+      </div>
+    )
   }
 }
