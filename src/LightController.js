@@ -41,7 +41,7 @@ class LightController extends Component {
   render() {
     const {classes} = this.props;
     return(
-      <div>
+      <div align="center">
         <Button className={classes.on_button} onClick={this.switchOn}>
           Switch On
         </Button>
