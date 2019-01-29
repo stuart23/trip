@@ -26,7 +26,7 @@ export default class Controller extends Component {
     return(
       <div>
         <LightController control={this.control} />
-        <GyroController useGravity={true} multiplier={1} control={this.control}/>
+        <GyroController useGravity={true} control={this.control}/>
       </div>
     )
   }  
