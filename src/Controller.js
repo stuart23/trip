@@ -22,7 +22,6 @@ export default class Controller extends Component {
   }
 
   render() {
-    const {classes} = this.props;
     return(
       <div>
         <LightController control={this.control} />
