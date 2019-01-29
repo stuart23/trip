@@ -106,7 +106,7 @@ class GyroController extends Component {
     const {classes} = this.props;
     const rgb = "#" + this.dec2hex(this.state.red) + this.dec2hex(this.state.green) + this.dec2hex(this.state.blue)
     return(
-      <div style={{padding=20}}>
+      <div style={{padding:20}}>
       <Grid container justify="center" spacing={24}>
         <Grid item sm={1}>
           <Paper className={classes.paper} style={{backgroundColor: rgb}}>
