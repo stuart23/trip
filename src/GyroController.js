@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/styles';
 
-export default class ReactAccelerometer extends Component {
+const styles = {
+  paper: {
+    padding: "30 30 px",
+    height: 80,
+    width: 80
+  }
+}
+
+class GyroController extends Component {
   constructor (props) {
     super(props)
 
@@ -52,6 +63,15 @@ export default class ReactAccelerometer extends Component {
     })
   }
 
+  dec2hex(dec) {
+    var hex = dec.toString(16);
+    if (hex.length === 2) {
+      return hex;
+    } else {
+      return "0" + hex;
+    }
+  }
+
   updateLights() {
     var hue = Math.round(65534/2 + (-this.state.x/8.5*65534/2));
     hue = Math.max(0, hue);
@@ -83,19 +103,22 @@ export default class ReactAccelerometer extends Component {
   }
 
   render () {
+    const {classes} = this.props;
+    const rgb = "#" + this.dec2hex(this.state.red) + this.dec2hex(this.state.green) + this.dec2hex(this.state.blue)
     return(
-      <div style={{background: "#FF0000"}}>
-        <div>
-        {this.state.red.toString(16)}
-        </div>
-        <div>
-        {this.state.green.toString(16)}
-        </div>
-        <div>
-        {this.state.blue.toString(16)}
-        </div>
-        {this.state.hue}
+      <div style={{padding=20}}>
+      <Grid container justify="center" spacing={24}>
+        <Grid item sm={1}>
+          <Paper className={classes.paper} style={{backgroundColor: rgb}}>
+            <div>
+              {Math.round(this.state.hue/655.34)}% Hue
+            </div>
+          </Paper>
+        </Grid>
+      </Grid>
       </div>
     )
   }
 }
+
+export default withStyles(styles)(GyroController);
