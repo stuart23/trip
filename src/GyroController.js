@@ -8,9 +8,12 @@ export default class ReactAccelerometer extends Component {
       x: null,
       y: null,
       z: null,
-      rotation: null,
+      hue: 0,
       landscape: false,
-      intervalId: null
+      intervalId: null,
+      red: 0,
+      green: 0,
+      blue: 0,
     }
 
     this.handleAcceleration = this.handleAcceleration.bind(this);
@@ -40,33 +43,59 @@ export default class ReactAccelerometer extends Component {
 
   handleAcceleration (event) {
     const { landscape } = this.state
-    const { useGravity, multiplier } = this.props
+    const { useGravity } = this.props
     const acceleration = useGravity ? event.accelerationIncludingGravity : event.acceleration
-    const rotation = event.rotationRate || null
     const { x, y, z } = acceleration
 
     this.setState({
-      rotation,
-      x: x * multiplier,
-      y: y * multiplier,
-      z: z * multiplier
+      x: x, y: y, z: z
     })
   }
 
   updateLights() {
-    this.props.control({"hue": Math.round(65534/2 + (this.state.x/10*65534/2)), "sat": 254, "transitiontime": 0});
+    var hue = Math.round(65534/2 + (-this.state.x/8.5*65534/2));
+    hue = Math.max(0, hue);
+    hue = Math.min(hue, 65534);
+    var red = 0;
+    var green = 0;
+    var blue = 0;
+    if (hue < 65534/6 ) {
+      red = 255;
+      green = Math.round(hue/(65534/6)*255);
+    } else if (hue < 65534/3 ) {
+      red = Math.round(255*(2-hue/(65534/6)));
+      green = 255;
+    } else if (hue < 65534/2) {
+      green = 255;
+      blue = Math.round(255*(hue/(65534/6)-2));
+    } else if (hue < 65534*2/3) {
+      green = Math.round(255*(4-hue/(65534/6)));
+      blue = 255;
+    } else if (hue < 65534*5/6) {
+      red = Math.round(255*(hue/(65534/6)-4));
+      blue = 255;
+    } else {
+      red = 255;
+      blue = Math.round(255*(6-hue/(65534/6)));
+    }
+    this.props.control({"hue": hue, "sat": 254, "transitiontime": 1, "colormode": "hs"});
+    this.setState({red: red, green: green, blue: blue, hue: hue});
   }
 
   render () {
-    const { x, y, z, rotation } = this.state
-
-    /**
-     * We have to detect if one of the values was ever set by the 'devicemotion' event,
-     * as some browsers implement the API, but the device itself doesn't support.
-     */
-    console.log(this.state);
     return(
-      null
+      <div style={{background: "#FF0000"}}>
+        <div>
+        {this.state.red.toString(16)}
+        </div>
+        <div>
+        {this.state.green.toString(16)}
+        </div>
+        <div>
+        {this.state.blue.toString(16)}
+        </div>
+        {this.state.hue}
+      </div>
     )
   }
 }
