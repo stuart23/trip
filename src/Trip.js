@@ -27,7 +27,7 @@ export default class Trip extends Component {
       bridge_ip: bridge_ip,
       username: username
     });
-  }  
+  }
 
   activateLight(light_id) {
     this.setState({
@@ -43,7 +43,7 @@ export default class Trip extends Component {
 
   componentDidUpdate() {
     if (this.state.logged_in & !this.state.lights_loaded) {
-      fetch("http://" + this.state.bridge_ip + "/api/"
+      fetch("https://" + this.state.bridge_ip + "/api/"
             + this.state.username, {
             method: "GET"
           }
@@ -93,5 +93,3 @@ export default class Trip extends Component {
     )
   }
 }
-    
-

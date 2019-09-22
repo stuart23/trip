@@ -54,7 +54,7 @@ class Authent extends Component {
   }
 
   checkAccess() {
-    fetch("http://" + this.state.bridge_ip + "/api/"
+    fetch("https://" + this.state.bridge_ip + "/api/"
           + this.state.username, {
           method: "GET"
         }
@@ -71,7 +71,7 @@ class Authent extends Component {
     })
   }
   getAccess() {
-    fetch("http://" + this.state.bridge_ip + "/api", {
+    fetch("https://" + this.state.bridge_ip + "/api", {
           body: JSON.stringify({"devicetype":"trip"}),
           method: "POST"
         }

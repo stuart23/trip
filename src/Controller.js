@@ -10,7 +10,7 @@ export default class Controller extends Component {
 
   control(command) {
     for (var light in this.props.active_lights) {
-      fetch("http://" + this.props.bridge_ip + "/api/"
+      fetch("https://" + this.props.bridge_ip + "/api/"
             + this.props.username + "/lights/"
             + this.props.active_lights[light]
             + "/state", {
@@ -28,6 +28,5 @@ export default class Controller extends Component {
         <GyroController useGravity={true} control={this.control}/>
       </div>
     )
-  }  
+  }
 }
-
