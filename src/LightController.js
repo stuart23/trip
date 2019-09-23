@@ -31,35 +31,17 @@ class LightController extends Component {
   }
 
   switchOn() {
-    for (var light in this.props.active_lights) {
-      fetch("http://" + this.props.bridge_ip + "/api/"
-            + this.props.username + "/lights/"
-            + this.props.active_lights[light]
-            + "/state", {
-            body: JSON.stringify({"on": true}),
-            method: "PUT"
-          }
-      );
-    }
+    this.props.control({"on": true});
   }
 
   switchOff() {
-    for (var light in this.props.active_lights) {
-      fetch("http://" + this.props.bridge_ip + "/api/"
-            + this.props.username + "/lights/"
-            + this.props.active_lights[light]
-            + "/state", {
-            body: JSON.stringify({"on": false}),
-            method: "PUT"
-          }
-      );
-    }
+    this.props.control({"on": false});
   }
 
   render() {
     const {classes} = this.props;
     return(
-      <div>
+      <div align="center">
         <Button className={classes.on_button} onClick={this.switchOn}>
           Switch On
         </Button>

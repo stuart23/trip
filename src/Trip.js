@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Authent from './Authent';
 import Groups from './Groups';
-import LightController from './LightController';
+import Controller from './Controller';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import AppBar from '@material-ui/core/AppBar';
 
 export default class Trip extends Component {
@@ -28,7 +27,7 @@ export default class Trip extends Component {
       bridge_ip: bridge_ip,
       username: username
     });
-  }  
+  }
 
   activateLight(light_id) {
     this.setState({
@@ -44,7 +43,7 @@ export default class Trip extends Component {
 
   componentDidUpdate() {
     if (this.state.logged_in & !this.state.lights_loaded) {
-      fetch("http://" + this.state.bridge_ip + "/api/"
+      fetch("https://" + this.state.bridge_ip + "/api/"
             + this.state.username, {
             method: "GET"
           }
@@ -85,7 +84,7 @@ export default class Trip extends Component {
           </List> :
            "Loading"
         }
-        <LightController
+        <Controller
           active_lights={this.state.active_lights}
           bridge_ip={this.state.bridge_ip}
           username={this.state.username}
@@ -94,5 +93,3 @@ export default class Trip extends Component {
     )
   }
 }
-    
-
