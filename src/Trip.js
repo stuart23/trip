@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 
 export default class Trip extends Component {
   constructor(props) {
+    console.log("Trip V1");
     super(props);
     this.state = {
       logged_in: false,

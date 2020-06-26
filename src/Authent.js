@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/styles';
 
+import Debug from './Debug';
+
 const styles = {
   connected: {
     padding: "1em",
@@ -49,12 +51,13 @@ class Authent extends Component {
       } else {
         this.setState({error: "Could not find bridge"})
       }
+      console.log(data);
     })
     .then(() => this.checkAccess())
   }
 
   checkAccess() {
-    fetch("https://" + this.state.bridge_ip + "/api/"
+    fetch("http://" + this.state.bridge_ip + "/api/"
           + this.state.username, {
           method: "GET"
         }
@@ -110,6 +113,12 @@ class Authent extends Component {
             {this.state.logged_in ? "Connected" : "Connecting"}
           </div>
         }
+        <Debug
+          bridge_ip={this.state.bridge_ip}
+          error={this.state.error}
+          message={this.state.message}
+          logged_in={this.state.logged_in}
+          />
       </Toolbar>
     )
   }
