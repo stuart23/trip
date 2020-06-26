@@ -36,5 +36,5 @@ export default class Group extends Component {
       </Collapse>
       </div>
     )
-  }  
-}    
+  }
+}

@@ -53,7 +53,8 @@ class GyroController extends Component {
   }
 
   handleAcceleration (event) {
-    const { landscape } = this.state
+    // May need to do something else in landscape mode?
+    // const { landscape } = this.state
     const { useGravity } = this.props
     const acceleration = useGravity ? event.accelerationIncludingGravity : event.acceleration
     const { x, y, z } = acceleration
