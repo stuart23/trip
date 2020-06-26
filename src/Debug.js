@@ -29,7 +29,7 @@ export default function Debug(props) {
   if (props.logged_in) {
     var message = "Logged in to " + props.bridge_ip;
   } else {
-    message = "Could not log in due to \"" + props.message + "\"";
+    message = "Could not log in due to \"" + props.error + "\"\nBridge response \"" + props.message + "\"";
   }
 
   return (
