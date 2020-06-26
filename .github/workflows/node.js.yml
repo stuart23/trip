@@ -23,6 +23,11 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm test
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: build
     - name: Upload S3
       uses: shallwefootball/upload-s3-action@v1.0.1
       with:
@@ -33,4 +38,4 @@ jobs:
         # aws bucket name
         aws_bucket: thelastdomainanyonewouldthinkof.com
         # directory to upload
-        source_dir: /
+        source_dir: build
