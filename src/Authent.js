@@ -51,6 +51,7 @@ class Authent extends Component {
       } else {
         this.setState({error: "Could not find bridge"})
       }
+      console.log(data);
     })
     .then(() => this.checkAccess())
   }
