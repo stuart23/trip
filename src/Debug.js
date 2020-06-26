@@ -27,9 +27,9 @@ export default function Debug(props) {
   const id = open ? 'simple-popover' : undefined;
 
   if (props.logged_in) {
-    var message = "Logged in to " + props.bridge_ip
+    var message = "Logged in to " + props.bridge_ip;
   } else {
-    message = "Shiiiiit"
+    message = "Could not log in due to \"" + props.message + "\"";
   }
 
   return (
