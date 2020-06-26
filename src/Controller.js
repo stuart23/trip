@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LightController from './LightController';
 import GyroController from './GyroController';
-// import BrightnessSliderABC from './BrightnessSliderABC';
+// import BrightnessSlider from './BrightnessSlider';
 
 export default class Controller extends Component {
   constructor(props) {
@@ -30,5 +30,5 @@ export default class Controller extends Component {
       </div>
     )
   }
-  // <BrightnessSliderABC control={this.control}/>
+  // <BrightnessSlider control={this.control}/>
 }
