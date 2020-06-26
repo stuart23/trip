@@ -74,8 +74,6 @@ export default class Trip extends Component {
           <Authent setCredentials={this.setCredentials} />
         </AppBar>
         </div>
-        Bridge ip: {this.state.bridge_ip}
-        username: {this.state.username}
         { this.state.lights_loaded ?
           <List component="div" disablePadding>
           <Groups
