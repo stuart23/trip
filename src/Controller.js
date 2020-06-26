@@ -27,8 +27,8 @@ export default class Controller extends Component {
       <div>
         <LightController control={this.control} />
         <GyroController useGravity={true} control={this.control}/>
-        // <BrightnessSliderABC control={this.control}/>
       </div>
     )
   }
+  // <BrightnessSliderABC control={this.control}/>
 }
