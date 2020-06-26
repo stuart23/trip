@@ -8,7 +8,8 @@ import Collapse from '@material-ui/core/Collapse';
 
 export default class Group extends Component {
   constructor(props) {
-    super(props);
+    // super(props);
+    super();
 
     this.state = {open: false};
     this.toggleOpen = this.toggleOpen.bind(this);
@@ -36,5 +37,5 @@ export default class Group extends Component {
       </Collapse>
       </div>
     )
-  }  
-}    
+  }
+}
