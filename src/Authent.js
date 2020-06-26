@@ -57,7 +57,7 @@ class Authent extends Component {
   }
 
   checkAccess() {
-    fetch("https://" + this.state.bridge_ip + "/api/"
+    fetch("http://" + this.state.bridge_ip + "/api/"
           + this.state.username, {
           method: "GET"
         }
