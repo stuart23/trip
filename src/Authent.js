@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/styles';
 
+import Debug from './Debug';
+
 const styles = {
   connected: {
     padding: "1em",
@@ -110,6 +112,12 @@ class Authent extends Component {
             {this.state.logged_in ? "Connected" : "Connecting"}
           </div>
         }
+        <Debug
+          bridge_ip={this.state.bridge_ip}
+          error={this.state.error}
+          message={this.state.message}
+          logged_in={this.state.logged_in}
+          />
       </Toolbar>
     )
   }
