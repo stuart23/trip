@@ -51,13 +51,12 @@ class Authent extends Component {
       } else {
         this.setState({error: "Could not find bridge"})
       }
-      console.log(data);
     })
     .then(() => this.checkAccess())
   }
 
   checkAccess() {
-    fetch("http://" + this.state.bridge_ip + "/api/"
+    fetch("https://" + this.state.bridge_ip + "/api/"
           + this.state.username, {
           method: "GET"
         }
@@ -72,6 +71,10 @@ class Authent extends Component {
         this.setState({intervalId: intervalId});
       }
     })
+    .catch((error) => {
+      console.error('Error:', error);
+      this.setState({error: error});
+    });
   }
   getAccess() {
     fetch("https://" + this.state.bridge_ip + "/api", {
