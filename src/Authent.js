@@ -82,6 +82,7 @@ class Authent extends Component {
       console.error('Error:', error);
       this.setState({error: error});
     });
+    this.props.setCredentials(this.state.username, "192.168.1.23");
   }
   getAccess() {
     fetch("https://" + this.state.bridge_ip + "/api", {
