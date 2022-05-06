@@ -56,11 +56,12 @@ class Authent extends Component {
   }
 
   checkAccess() {
-    fetch("https://" + this.state.bridge_ip + "/api/"
-          + this.state.username, {
+    const url = "https://" + this.state.bridge_ip + "/api/" + this.state.username;
+    console.log('Bridge URL:', url);
+    fetch({
+          url,
           method: "GET"
-        }
-    )
+    })
     .then(response => response.json())
     .then(response => {
       if ("lights" in response) {
