@@ -44,7 +44,13 @@ class Authent extends Component {
 
   componentDidMount() {
     fetch("https://discovery.meethue.com")
-    .then(response => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } elif (response.status === 429) {
+        this.setState({error: "You have made too many requests. Wait 15 mins and try again."});
+      }
+    })
     .then(data => {
       if (data.length === 1) {
         this.setState({bridge_ip: data[0].internalipaddress})
