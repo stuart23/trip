@@ -47,7 +47,7 @@ class Authent extends Component {
     .then((response) => {
       if (response.ok) {
         return response.json();
-      } elif (response.status === 429) {
+      } else if (response.status === 429) {
         this.setState({error: "You have made too many requests. Wait 15 mins and try again."});
       }
     })
