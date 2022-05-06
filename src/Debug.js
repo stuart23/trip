@@ -51,6 +51,7 @@ export default function Debug(props) {
       >
         <Typography className={classes.typography}>
           {message}
+          <p onClick={()=> window.open("https://" + props.bridge_ip, "_blank")}>{props.bridge_ip}</p>
         </Typography>
       </Popover>
     </div>
