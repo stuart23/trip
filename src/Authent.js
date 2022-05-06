@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/styles';
 
@@ -36,19 +37,24 @@ class Authent extends Component {
       error: false,
       logged_in: false,
       message: "",
-      username: localStorage.getItem('username')
+      username: "trip"
     }
+    this.getBridge = this.getBridge.bind(this);
     this.getAccess = this.getAccess.bind(this);
     this.checkAccess = this.checkAccess.bind(this);
   }
 
   componentDidMount() {
-    fetch("https://discovery.meethue.com")
+    // this.getBridge();
+    this.setState({bridge_ip: "192.168.1.23"});
+  }
+
+  getBridge() {
+    axios.get("https://discovery.meethue.com")
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else if (response.status === 429) {
-        this.setState({error: "You have made too many requests. Wait 15 mins and try again."});
         throw new Error("You have made too many requests. Wait 15 mins and try again.");
       }
     })
@@ -56,19 +62,27 @@ class Authent extends Component {
       if (data.length === 1) {
         this.setState({bridge_ip: data[0].internalipaddress})
       } else {
-        this.setState({error: "Could not find bridge"})
+        throw new Error("Could not find bridge");
       }
     })
     .then(() => this.checkAccess())
+    .catch((error) => {
+      this.setState({error: error});
+      this.checkAccess();
+    }
+  )
   }
 
   checkAccess() {
     const url = "https://" + this.state.bridge_ip + "/api/" + this.state.username;
     console.log('Bridge URL:', url);
-    fetch({
-          url,
-          method: "GET"
-    })
+    axios.get(
+      url,
+      {
+        mode: 'cors',
+        cache: 'no-cache'
+      }
+    )
     .then(response => response.json())
     .then(response => {
       if ("lights" in response) {
@@ -83,8 +97,8 @@ class Authent extends Component {
       console.error('Error:', error);
       this.setState({error: error});
     });
-    this.props.setCredentials(this.state.username, "192.168.1.23");
   }
+
   getAccess() {
     fetch("https://" + this.state.bridge_ip + "/api", {
           body: JSON.stringify({"devicetype":"trip"}),
